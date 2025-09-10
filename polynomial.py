@@ -13,7 +13,7 @@ class X:
     def simplify(self):
         # TODO (Optional Exercise): Implement simplification
         # X cannot be simplified further, so return self
-        pass
+        return self
 
 
 class Int:
@@ -31,7 +31,7 @@ class Int:
     def simplify(self):
         # TODO (Optional Exercise): Implement simplification
         # Integer constants cannot be simplified further, so return self
-        pass
+        return self
 
 
 class Add:
@@ -53,7 +53,19 @@ class Add:
         # TODO (Optional Exercise): Implement simplification
         # Examples: X + 0 -> X, 0 + X -> X, 3 + 5 -> 8
         # Hint: Simplify operands first, then apply simplification rules
-        pass
+        left = self.p1.simplify()
+        right = self.p2.simplify()
+
+        if(isinstance(left, Int) and isinstance(right, Int)):
+            return Int(left.i + right.i)
+        
+        if(isinstance(left, Int) and left.i == 0):
+            return right
+        
+        if(isinstance(right, Int) and right.i == 0):
+            return left
+        
+        return Add(left, right)
 
 
 class Mul:
@@ -81,7 +93,25 @@ class Mul:
         # TODO (Optional Exercise): Implement simplification
         # Examples: X * 0 -> 0, X * 1 -> X, 3 * 5 -> 15
         # Hint: Simplify operands first, then apply simplification rules
-        pass
+        left = self.p1.simplify()
+        right = self.p2.simplify()
+
+        if(isinstance(left, Int) and isinstance(right, Int)):
+            return Int(left.i * right.i)
+        
+        if(isinstance(left, Int)):
+            if(left.i == 0):
+                return Int(0)
+            elif(left.i == 1):
+                return right
+        
+        if(isinstance(right, Int)):
+            if(right.i == 0):
+                return Int(0)
+            elif(right.i == 1):
+                return left
+        
+        return Mul(left, right)
 
 
 class Sub:
@@ -112,7 +142,16 @@ class Sub:
         # TODO (Optional Exercise): Implement simplification
         # Examples: X - 0 -> X, 5 - 3 -> 2
         # Hint: Simplify operands first, then apply simplification rules
-        pass
+        left = self.p1.simplify()
+        right = self.p2.simplify()
+
+        if(isinstance(left, Int) and isinstance(right, Int)):
+            return Int(left.i - right.i)
+        
+        if(isinstance(right, Int) and right.i == 0):
+            return left
+        
+        return Sub(left, right)
 
 
 class Div:
@@ -146,7 +185,19 @@ class Div:
         # TODO (Optional Exercise): Implement simplification
         # Examples: X / 1 -> X, 6 / 2 -> 3
         # Hint: Simplify operands first, then apply simplification rules
-        pass
+        left = self.p1.simplify()
+        right = self.p2.simplify()
+
+        if(isinstance(left, Int) and isinstance(right, Int)):
+            return Int(left.i // right.i)
+        
+        if(isinstance(left, Int) and left.i == 0):
+            return Int(0)
+        
+        if(isinstance(right, Int) and right.i == 1):
+            return left
+        
+        return Div(left, right)
 
 
 # Original polynomial example
