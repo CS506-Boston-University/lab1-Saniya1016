@@ -55,11 +55,11 @@ class Add:
         # Hint: Simplify operands first, then apply simplification rules
         left = self.p1.simplify()
         right = self.p2.simplify()
-        if(isinstance(left, Int) and isinstance(right, Int)):
+        if isinstance(left, Int) and isinstance(right, Int):
             return Int(left.i + right.i)
-        if(isinstance(left, Int) and left.i == 0):
+        if isinstance(left, Int) and left.i == 0:
             return right
-        if(isinstance(right, Int) and right.i == 0):
+        if isinstance(right, Int) and right.i == 0:
             return left
         return Add(left, right)
 
@@ -91,17 +91,17 @@ class Mul:
         # Hint: Simplify operands first, then apply simplification rules
         left = self.p1.simplify()
         right = self.p2.simplify()
-        if(isinstance(left, Int) and isinstance(right, Int)):
+        if isinstance(left, Int) and isinstance(right, Int):
             return Int(left.i * right.i)
-        if(isinstance(left, Int)):
-            if(left.i == 0):
+        if isinstance(left, Int):
+            if left.i == 0:
                 return Int(0)
-            elif(left.i == 1):
+            elif left.i == 1:
                 return right
-        if(isinstance(right, Int)):
-            if(right.i == 0):
+        if isinstance(right, Int):
+            if right.i == 0:
                 return Int(0)
-            elif(right.i == 1):
+            elif right.i == 1:
                 return left
         return Mul(left, right)
 
@@ -136,9 +136,9 @@ class Sub:
         # Hint: Simplify operands first, then apply simplification rules
         left = self.p1.simplify()
         right = self.p2.simplify()
-        if(isinstance(left, Int) and isinstance(right, Int)):
+        if isinstance(left, Int) and isinstance(right, Int):
             return Int(left.i - right.i)
-        if(isinstance(right, Int) and right.i == 0):
+        if isinstance(right, Int) and right.i == 0:
             return left
         return Sub(left, right)
 
@@ -176,11 +176,11 @@ class Div:
         # Hint: Simplify operands first, then apply simplification rules
         left = self.p1.simplify()
         right = self.p2.simplify()
-        if(isinstance(left, Int) and isinstance(right, Int)):
+        if isinstance(left, Int) and isinstance(right, Int):
             return Int(left.i // right.i)
-        if(isinstance(left, Int) and left.i == 0):
+        if isinstance(left, Int) and left.i == 0:
             return Int(0)
-        if(isinstance(right, Int) and right.i == 1):
+        if isinstance(right, Int) and right.i == 1:
             return left
         return Div(left, right)
 
